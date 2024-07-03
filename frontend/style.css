@@ -1,0 +1,64 @@
+body {
+    background-color: #f8f9fa;
+    font-family: Liberation, sans-serif;
+}
+
+#tree-container {
+    max-width: 800px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.node {
+    margin-left: 10px;
+    position: relative;
+}
+
+.btn {
+    background-color: transparent;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #007bff;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 30em;
+    transition: color 0.3s ease, transform 0.3s ease;
+    text-align: left; 
+}
+
+.btn:hover {
+    color: #0056b3;
+    text-decoration: none;
+    white-space: normal;
+}
+
+.arrow-icon {
+    margin-right: 5px;
+}
+
+.child-container {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.fa-chevron-right,
+.fa-chevron-down {
+    transition: transform 0.3s ease;
+}
+
+.topic-label {
+    font-weight: bold;
+    color: #333;
+    margin-right: 5px;
+}
+
