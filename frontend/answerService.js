@@ -14,27 +14,41 @@ function createAnswerForm(topic, label) {
     return form;
 }
 
-function sendAnswer(data) {
+function sendAnswer(data, label, targetDiv) {
     fetch('http://localhost:3000/api/answer', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error('Failed to submit answer');
+            throw new Error('Network response was not ok');
         }
         return response.json();
     })
     .then(responseData => {
-        console.log('Answer submitted successfully:', responseData);
-        // Optionally show a success message or update UI
+        const alertDiv = document.createElement('div');
+        alertDiv.className = 'alert alert-success mt-3';
+        alertDiv.textContent = `Answer submitted successfully for "${label}"`;
+        targetDiv.appendChild(alertDiv);
+        setTimeout(() => {
+            alertDiv.remove();
+        }, 5000);
+
+        console.log('Submit successful:', responseData);
     })
     .catch(error => {
         console.error('Error submitting answer:', error);
-        // Handle error scenarios (e.g., show error message)
+    const alertDiv = document.createElement('div');
+        alertDiv.className = 'alert alert-failure mt-3';
+        alertDiv.textContent = `Failed to submit answer for "${label}". Please try again.`;
+        targetDiv.appendChild(alertDiv);
+        setTimeout(() => {
+            alertDiv.remove();
+        }, 5000);
+
     });
 }
 

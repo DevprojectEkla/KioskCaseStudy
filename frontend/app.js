@@ -24,11 +24,11 @@ function displayNode(node, container) {
     if (node.children && node.children.length > 0) {
         button.onclick = () => toggleNode(div);
         const arrow = document.createElement('i');
-        arrow.className = 'fas fa-plus arrow-icon'; // Use Font Awesome plus icon
+        arrow.className = 'fas fa-plus arrow-icon'; 
         button.appendChild(arrow);
     } else {
         button.disabled = true;
-        button.innerHTML = '&mdash; '; // Use mdash for leaf nodes without children
+        button.innerHTML = '&mdash; '; 
     }
 
     const topicLabel = document.createElement('span');
@@ -55,10 +55,10 @@ function displayNode(node, container) {
     } else {
         const answerForm = createAnswerForm(node.topic, node.label);
 
-        // Create a Bootstrap styled submit button (outlined)
+        
         const submitButton = document.createElement('button');
-        submitButton.type = 'button'; // Change to type button since it's not a form submission button anymore
-        submitButton.className = 'btn btn-outline-primary'; // Bootstrap classes for styling and alignment
+        submitButton.type = 'button'; 
+        submitButton.className = 'btn btn-outline-primary'; 
         submitButton.textContent = 'Submit';
         submitButton.addEventListener('click', () => {
             const textarea = answerForm.querySelector('textarea');
@@ -69,7 +69,7 @@ function displayNode(node, container) {
                     label: node.label,
                     answer: answer
                 };
-                sendPostRequest(data, node.label, div); // Pass 'div' reference to sendPostRequest
+                sendAnswer(data, node.label, div); 
                 textarea.value = '';
             } else {
                 const alertDiv = document.createElement('div');
@@ -86,47 +86,6 @@ function displayNode(node, container) {
         div.appendChild(submitButton);
     }
 }
-
-function sendPostRequest(data, label, targetDiv) {
-    fetch('http://localhost:3000/api/answer', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(responseData => {
-        const alertDiv = document.createElement('div');
-        alertDiv.className = 'alert alert-success mt-3';
-        alertDiv.textContent = `Answer submitted successfully for "${label}"`;
-        targetDiv.appendChild(alertDiv);
-        setTimeout(() => {
-            alertDiv.remove();
-        }, 5000);
-
-        console.log('Submit successful:', responseData);
-    })
-    .catch(error => {
-        console.error('Error submitting answer:', error);
-    const alertDiv = document.createElement('div');
-        alertDiv.className = 'alert alert-failure mt-3';
-        alertDiv.textContent = `Failed to submit answer for "${label}". Please try again.`;
-        targetDiv.appendChild(alertDiv);
-        setTimeout(() => {
-            alertDiv.remove();
-        }, 5000);
-
-    });
-}
-
-
-
 
 function toggleNode(nodeElement) {
     const arrow = nodeElement.querySelector('.arrow-icon');
