@@ -5,13 +5,14 @@
 This project demonstrates a basic fullstack web application that visualizes nested data in a hierarchical tree structure. It's designed to handle complex nested data sets where each node can have multiple levels of children.
 
 ![Nested Data Display Screenshot](screenshot.png)
+
 ## Features
 
 - **Tree Navigation:** Navigate through a hierarchical taxonomy structure.
 - **Expand/Collapse Nodes:** Click on nodes with sub-nodes to expand and collapse them.
 - **Interactive Interface:** Buttons change appearance to indicate expandable nodes.
+- **Answer Text Area:** Users can enter responses to different topics in a text area and submit them to the server.
 - **Bootstrap Styling:** Utilizes Bootstrap for a responsive and modern UI.
-
 
 ## Installation
 
